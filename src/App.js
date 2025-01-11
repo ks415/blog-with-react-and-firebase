@@ -5,6 +5,7 @@ import CreatePost from './components/CreatePost';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { useState } from 'react';
 
 function App() {
@@ -12,13 +13,18 @@ function App() {
 
   return (
     <Router>
-      <Navbar isAuth={isAuth} />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/createpost" element={<CreatePost isAuth={isAuth} />}></Route>
-        <Route path="/login" element={<Login setIsAuth={setIsAuth} />}></Route>
-        <Route path="/logout" element={<Logout setIsAuth={setIsAuth}/>}></Route>
-      </Routes>
+      <div className="app-container">
+        <Navbar isAuth={isAuth} />
+        <div className="content-wrap">
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/createpost" element={<CreatePost isAuth={isAuth} />}></Route>
+            <Route path="/login" element={<Login setIsAuth={setIsAuth} />}></Route>
+            <Route path="/logout" element={<Logout setIsAuth={setIsAuth}/>}></Route>
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 }

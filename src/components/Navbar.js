@@ -7,23 +7,28 @@ import { faHouse, faFilePen, faArrowRightToBracket } from '@fortawesome/free-sol
 const Navbar = ({ isAuth }) => {
   return (
     <nav>
-        <Link to="/"><FontAwesomeIcon icon={faHouse} />
-        ホーム
-        </Link>
-        {!isAuth ? (
-          <Link to="/login"><FontAwesomeIcon icon={faArrowRightToBracket} />
-          ログイン
+        <div className="nav-left">
+          <h1>簡易掲示板</h1>
+        </div>
+        <div className="nav-right">
+          <Link to="/"><FontAwesomeIcon icon={faHouse} />
+          ホーム
           </Link>
-        ) : (
-          <>
-            <Link to="/createpost"><FontAwesomeIcon icon={faFilePen} />
-            記事投稿
+          {!isAuth ? (
+            <Link to="/login"><FontAwesomeIcon icon={faArrowRightToBracket} />
+            ログイン
             </Link>
-            <Link to="/logout"><FontAwesomeIcon icon={faArrowRightToBracket} />
-            ログアウト
-            </Link>
-          </>
-        )}
+          ) : (
+            <>
+              <Link to="/createpost"><FontAwesomeIcon icon={faFilePen} />
+              記事投稿
+              </Link>
+              <Link to="/logout"><FontAwesomeIcon icon={faArrowRightToBracket} />
+              ログアウト
+              </Link>
+            </>
+          )}
+        </div>
     </nav>
   )
 }

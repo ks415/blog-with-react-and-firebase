@@ -1,7 +1,8 @@
 import React from 'react'
-import { auth, provider } from '../firebase';
-import { signInWithPopup,signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import './Logout.css';
 
 const Logout = ({ setIsAuth }) => {
   const navigate = useNavigate();
@@ -10,13 +11,15 @@ const Logout = ({ setIsAuth }) => {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
-      navigate("/login");
+      navigate("/");
     })
   }
   return (
-    <div>
+    <div className="logoutPage">
       <p>ログアウトする</p>
-      <button onClick={logout}>Googleでログアウト</button>
+      <button onClick={logout}>
+        Googleでログアウト
+      </button>
     </div>
   )
 }

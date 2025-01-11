@@ -7,8 +7,14 @@ import { useNavigate } from 'react-router-dom';
 const CreatePost = ({ isAuth }) => {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // タイトルと投稿内容の両方が空でない場合のみ、フォームが有効
+    setIsFormValid(title.trim() !== "" && postText.trim() !== "");
+  }, [title, postText]);
 
   const createPost = async () => {
     await addDoc(collection(db, "posts"), {
@@ -26,6 +32,7 @@ const CreatePost = ({ isAuth }) => {
     if (!isAuth) {
       navigate("/login");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -47,7 +54,17 @@ const CreatePost = ({ isAuth }) => {
             onChange={(e) => setPostText(e.target.value)}
           ></textarea>
         </div>
-        <button className='postButton' onClick={createPost}>投稿する</button>
+        <button 
+          className='postButton' 
+          onClick={createPost}
+          disabled={!isFormValid}
+          style={{ 
+            opacity: isFormValid ? 1 : 0.5,
+            cursor: isFormValid ? 'pointer' : 'not-allowed'
+          }}
+        >
+          投稿する
+        </button>
       </div>
     </div>
   )
